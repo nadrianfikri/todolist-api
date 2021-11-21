@@ -45,6 +45,41 @@ exports.getAllTask = async (req, res) => {
     });
   }
 };
+// read data by status
+exports.getTaskByStatus = async (req, res) => {
+  try {
+    const { status } = req.params;
+    const taskDataByStatus = await Task.findAll({
+      where: {
+        status,
+      },
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'],
+      },
+      order: [['createdAt', 'ASC']],
+    });
+
+    // if null data send error status
+    if (taskDataByStatus.length === 0) {
+      res.status(500).send({
+        status: 'Failed',
+        message: 'Server error',
+      });
+      return;
+    }
+    res.send({
+      status: 'success',
+      message: 'Get all data by status success',
+      data: taskDataByStatus,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      status: 'Failed',
+      message: 'Server error',
+    });
+  }
+};
 
 // read one data
 exports.getTask = async (req, res) => {
