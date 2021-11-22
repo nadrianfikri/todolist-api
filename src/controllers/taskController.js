@@ -56,17 +56,9 @@ exports.getTaskByStatus = async (req, res) => {
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
       },
-      order: [['createdAt', 'ASC']],
+      order: [['updatedAt', 'ASC']],
     });
 
-    // if null data send error status
-    if (taskDataByStatus.length === 0) {
-      res.status(500).send({
-        status: 'Failed',
-        message: 'Server error',
-      });
-      return;
-    }
     res.send({
       status: 'success',
       message: 'Get all data by status success',
@@ -90,15 +82,6 @@ exports.getTask = async (req, res) => {
         id,
       },
     });
-
-    // if null data send error status
-    if (taskData.id === null) {
-      res.status(500).send({
-        status: 'Failed',
-        message: 'Server error',
-      });
-      return;
-    }
 
     res.send({
       status: 'success',
@@ -129,15 +112,6 @@ exports.updateTask = async (req, res) => {
         id,
       },
     });
-
-    // if null data send error status
-    if (updatedData.id === null) {
-      res.status(500).send({
-        status: 'Failed',
-        message: 'Server error',
-      });
-      return;
-    }
 
     res.send({
       status: 'success',

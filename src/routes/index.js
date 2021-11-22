@@ -7,8 +7,8 @@ const { addTask, getAllTask, getTaskByStatus, getTask, updateTask, deleteTask } 
 // routes task
 router.post('/task', addTask);
 router.get('/task', getAllTask);
-router.get('/task/:status', getTaskByStatus);
 router.get('/task/:id', getTask);
+router.get('/task/status/:status', getTaskByStatus);
 router.patch('/task/:id', updateTask);
 router.delete('/task/:id', deleteTask);
 
