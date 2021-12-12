@@ -11,6 +11,6 @@ app.use(cors());
 
 // grouping router endpoint
 app.use('/api/v1/', router);
-app.use('/', 'Hello Todo Api');
+app.get('/', (req, res) => res.send('Hello Todo Api'));
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
